@@ -19,17 +19,25 @@ public class Validator {
         try {
             money = Integer.parseInt(inputMoney);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(createErrorMessage("구매 금액이 숫자가 아닙니다."), e);
+            throw createIllegalArgumentException("구매 금액이 숫자가 아닙니다.", e);
         }
 
         return money;
     }
 
     private static void checkAmount(int money) {
-        if (money % 1000 != 0) throw new IllegalArgumentException(createErrorMessage("구매 금액이 1,000원 단위가 아닙니다."));
+        if (money % 1000 != 0) throw createIllegalArgumentException("구매 금액이 1,000원 단위가 아닙니다.");
     }
 
-    private static String createErrorMessage(String message) {
+    public static IllegalArgumentException createIllegalArgumentException(String message) {
+        return new IllegalArgumentException(createErrorMessage(message));
+    }
+
+    public static IllegalArgumentException createIllegalArgumentException(String message, Throwable cause) {
+        return new IllegalArgumentException(createErrorMessage(message), cause);
+    }
+
+    public static String createErrorMessage(String message) {
         return ERROR_MESSAGE + message;
     }
 }
