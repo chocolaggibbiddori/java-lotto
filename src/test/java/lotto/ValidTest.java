@@ -53,4 +53,25 @@ public class ValidTest {
         //t
         assertThatThrownBy(() -> Validator.checkInputWinningNumbersAndReturn(inputWinningNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("보너스 번호는 규격에 맞아야 하며, 당첨 번호에 포함되지 않아야 한다.")
+    @Test
+    void inputBonusNumber_Success() {
+        //g
+        String inputBonusNumber = "5";
+
+        //w
+        int bonusNumber = Validator.checkBonusNumberAndReturn(inputBonusNumber);
+
+        //t
+        assertThat(bonusNumber).isEqualTo(5);
+    }
+
+    @DisplayName("보너스 번호가 규격에 맞지 않으면 예외가 발생한다.")
+    @ValueSource(strings = {"0", "46", "1, 35", "24j"})
+    @ParameterizedTest
+    void inputBonusNumber_FailByGrammar(String inputBonusNumber) {
+        //t
+        assertThatThrownBy(() -> Validator.checkBonusNumberAndReturn(inputBonusNumber)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
