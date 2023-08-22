@@ -27,6 +27,10 @@ public class Lotto {
         if (count != 6) throw createIllegalArgumentException("중복된 숫자가 있습니다.");
     }
 
+    boolean isContains(int number) {
+        return numbers.contains(number);
+    }
+
     @Override
     public String toString() {
         return numbers.toString();

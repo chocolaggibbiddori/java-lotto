@@ -65,4 +65,9 @@ public class Validator {
         if (i < 1 || i > 45) throw createIllegalArgumentException("1-45 사이의 숫자를 입력해주세요.");
         return i;
     }
+
+    public static int checkBonusNumberAndReturn(String inputBonusNumber) {
+        checkNumberFormat(inputBonusNumber);
+        return checkNumberOutOfRangeAndReturn(inputBonusNumber);
+    }
 }
