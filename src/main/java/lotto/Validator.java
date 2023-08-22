@@ -10,22 +10,15 @@ public class Validator {
     private Validator() {
     }
 
-    public static int checkInputMoney(String inputMoney) {
-        int money = checkNumberFormat(inputMoney);
+    public static int checkInputMoneyAndReturn(String inputMoney) {
+        int money = checkNumberFormatAndReturn(inputMoney);
         checkAmount(money);
         return money;
     }
 
-    private static int checkNumberFormat(String inputMoney) {
-        int money;
-
-        try {
-            money = Integer.parseInt(inputMoney);
-        } catch (NumberFormatException e) {
-            throw createIllegalArgumentException("구매 금액이 숫자가 아닙니다.", e);
-        }
-
-        return money;
+    private static int checkNumberFormatAndReturn(String inputMoney) {
+        checkNumberFormat(inputMoney);
+        return Integer.parseInt(inputMoney);
     }
 
     private static void checkAmount(int money) {
@@ -44,15 +37,15 @@ public class Validator {
         return ERROR_MESSAGE + message;
     }
 
-    public static List<Integer> checkInputWinningNumbers(String inputWinningNumbers) {
+    public static List<Integer> checkInputWinningNumbersAndReturn(String inputWinningNumbers) {
         List<Integer> numbers = new ArrayList<>();
         String[] split = inputWinningNumbers.split(",");
 
         checkWinningNumbersSize(split);
         for (String str : split) {
             str = str.trim();
-            checkWinningNumbersFormat(str);
-            int number = checkWinningNumbersOutOfRange(str);
+            checkNumberFormat(str);
+            int number = checkNumberOutOfRangeAndReturn(str);
             numbers.add(number);
         }
 
@@ -63,11 +56,11 @@ public class Validator {
         if (split.length != AutoLottoPublisher.LOTTO_NUM) throw createIllegalArgumentException("6개의 숫자를 입력해주세요.");
     }
 
-    private static void checkWinningNumbersFormat(String str) {
+    private static void checkNumberFormat(String str) {
         if (str.matches("\\D")) throw createIllegalArgumentException("숫자를 입력해주세요.");
     }
 
-    private static int checkWinningNumbersOutOfRange(String str) {
+    private static int checkNumberOutOfRangeAndReturn(String str) {
         int i = Integer.parseInt(str);
         if (i < 1 || i > 45) throw createIllegalArgumentException("1-45 사이의 숫자를 입력해주세요.");
         return i;

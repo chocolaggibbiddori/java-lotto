@@ -18,7 +18,7 @@ public class ValidTest {
         String inputMoney = "8000";
 
         //w
-        int checkedMoney = Validator.checkInputMoney(inputMoney);
+        int checkedMoney = Validator.checkInputMoneyAndReturn(inputMoney);
 
         //t
         assertThat(checkedMoney).isEqualTo(8000);
@@ -29,7 +29,7 @@ public class ValidTest {
     @ParameterizedTest
     void inputPurchaseAmountTest_fail_NumberFormat(String inputMoney) {
         //t
-        assertThatThrownBy(() -> Validator.checkInputMoney(inputMoney)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Validator.checkInputMoneyAndReturn(inputMoney)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("당첨 번호는 규격에 맞아야 한다.")
@@ -39,7 +39,7 @@ public class ValidTest {
         String inputWinningNumbers = "1, 3, 5, 7, 9, 11";
 
         //w
-        List<Integer> numbers = Validator.checkInputWinningNumbers(inputWinningNumbers);
+        List<Integer> numbers = Validator.checkInputWinningNumbersAndReturn(inputWinningNumbers);
 
         //t
         System.out.println("numbers = " + numbers);
@@ -51,6 +51,6 @@ public class ValidTest {
     @ParameterizedTest
     void inputWinningNumbers_FailByGrammar(String inputWinningNumbers) {
         //t
-        assertThatThrownBy(() -> Validator.checkInputWinningNumbers(inputWinningNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Validator.checkInputWinningNumbersAndReturn(inputWinningNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 }
