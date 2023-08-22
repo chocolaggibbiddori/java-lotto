@@ -7,7 +7,8 @@ import java.util.List;
 
 public class AutoLottoPublisher implements LottoPublish {
 
-    private static final int MIN_AMOUNT = 1000;
+    public static final int MIN_AMOUNT = 1000;
+    public static final int LOTTO_NUM = 6;
 
     @Override
     public List<Lotto> createLottoList(int money) {

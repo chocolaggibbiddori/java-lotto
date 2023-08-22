@@ -18,5 +18,9 @@ public class Application {
 
         System.out.println(lottoNum + "개를 구매했습니다.");
         lottoList.forEach(System.out::println);
+
+        // 3. 당첨 번호를 입력 받는다.
+        String inputWinningNumbers = Console.readLine();
+        List<Integer> numbers = Validator.checkInputWinningNumbers(inputWinningNumbers);
     }
 }
