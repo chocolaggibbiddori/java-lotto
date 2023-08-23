@@ -52,7 +52,7 @@ public class WinningLottoTest {
         double rateOfReturn3 = winningLotto3.rateOfReturn(lottoList);
 
         //t
-        assertThat(rateOfReturn1).isEqualTo(333833.3); // 2,003,000,000 / 6,000
+        assertThat(rateOfReturn1).isEqualTo(333583.3); // 2,001,500,000 / 6,000
         assertThat(rateOfReturn2).isEqualTo(5258.3); // 31,550,000 / 6,000
         assertThat(rateOfReturn3).isEqualTo(0.8); // 5,000 / 6,000
     }
