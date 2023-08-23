@@ -17,6 +17,7 @@ public class AutoLottoPublisher implements LottoPublish {
 
         for (int i = 0; i < lottoNum; i++) {
             List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+            numbers.sort(Integer::compareTo);
             lottoList.add(new Lotto(numbers));
         }
 
