@@ -1,8 +1,9 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.Validator.*;
+import static lotto.Validator.createIllegalArgumentException;
 
 public class Lotto {
 
@@ -29,6 +30,10 @@ public class Lotto {
 
     boolean isContains(int number) {
         return numbers.contains(number);
+    }
+
+    List<Integer> getNumbers() {
+        return new ArrayList<>(numbers);
     }
 
     @Override

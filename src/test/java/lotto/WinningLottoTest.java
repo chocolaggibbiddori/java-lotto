@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.EnumMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,13 +48,21 @@ public class WinningLottoTest {
         WinningLotto winningLotto3 = new WinningLotto(winningNumberList3, 12);
 
         //w
-        double rateOfReturn1 = winningLotto1.rateOfReturn(lottoList);
-        double rateOfReturn2 = winningLotto2.rateOfReturn(lottoList);
-        double rateOfReturn3 = winningLotto3.rateOfReturn(lottoList);
+        EnumMap<Rank, Integer> rankMap = getRankMap();
+
+        double rateOfReturn1 = winningLotto1.getRateOfReturn(lottoList, rankMap);
+        double rateOfReturn2 = winningLotto2.getRateOfReturn(lottoList, rankMap);
+        double rateOfReturn3 = winningLotto3.getRateOfReturn(lottoList, rankMap);
 
         //t
         assertThat(rateOfReturn1).isEqualTo(333583.3); // 2,001,500,000 / 6,000
         assertThat(rateOfReturn2).isEqualTo(5258.3); // 31,550,000 / 6,000
         assertThat(rateOfReturn3).isEqualTo(0.8); // 5,000 / 6,000
+    }
+
+    private EnumMap<Rank, Integer> getRankMap() {
+        EnumMap<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) rankMap.put(rank, 0);
+        return rankMap;
     }
 }

@@ -1,7 +1,11 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static lotto.AutoLottoPublisher.LOTTO_NUM;
 
 public class Validator {
 
@@ -38,7 +42,7 @@ public class Validator {
     }
 
     public static List<Integer> checkInputWinningNumbersAndReturn(String inputWinningNumbers) {
-        List<Integer> numbers = new ArrayList<>();
+        Set<Integer> numbers = new HashSet<>();
         String[] split = inputWinningNumbers.split(",");
 
         checkWinningNumbersSize(split);
@@ -49,21 +53,26 @@ public class Validator {
             numbers.add(number);
         }
 
-        return numbers;
+        checkDuplicated(numbers);
+        return new ArrayList<>(numbers);
     }
 
     private static void checkWinningNumbersSize(String[] split) {
-        if (split.length != AutoLottoPublisher.LOTTO_NUM) throw createIllegalArgumentException("6개의 숫자를 입력해주세요.");
+        if (split.length != LOTTO_NUM) throw createIllegalArgumentException("6개의 숫자를 입력해주세요.");
     }
 
     private static void checkNumberFormat(String str) {
-        if (str.matches("\\D")) throw createIllegalArgumentException("숫자를 입력해주세요.");
+        if (str.matches(".*\\D.*")) throw createIllegalArgumentException("숫자로 입력해주세요.");
     }
 
     private static int checkNumberOutOfRangeAndReturn(String str) {
         int i = Integer.parseInt(str);
         if (i < 1 || i > 45) throw createIllegalArgumentException("1-45 사이의 숫자를 입력해주세요.");
         return i;
+    }
+
+    private static void checkDuplicated(Set<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUM) throw createIllegalArgumentException("중복된 숫자가 입력되었습니다.");
     }
 
     public static int checkBonusNumberAndReturn(String inputBonusNumber) {
